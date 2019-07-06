@@ -1,61 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadCharacters } from '../../action-creators';
-import {
-    Root,
-    Container,
-    Navigation,
-    SeachForm,
-    SeachInput,
-    Filters,
-    View,
-    Table,
-    Gallery,
-    Heading,
-    Wrapper,
-    Button,
-    Character,
-    Characters,
-} from './styled';
+import Navigation from '../navigation';
+import { Root, Container, Character, Characters } from './styled';
 
 class CharacterList extends Component {
-    state = {
-        view: 'gallery',
-    };
-
     componentDidUpdate() {
         const { teamName, characters, loadCharacters } = this.props;
         if (teamName && !characters.length) loadCharacters(teamName);
     }
 
-    handleChangeView = nextView => () => {
-        const { view } = this.state;
-
-        if (view !== nextView) this.setState({ view: nextView });
-    };
-
     render() {
-        const { teamName, characters, isCharactersLoading } = this.props;
-        const { view } = this.state;
+        const { teamName, characters, isCharactersLoading, view } = this.props;
         return (
             <Root>
                 <Container teamName={teamName}>
-                    <Navigation>
-                        <SeachForm>
-                            <SeachInput placeholder={'...search'} />
-                        </SeachForm>
-                        <Filters></Filters>
-                        <View>
-                            <Gallery
-                                active={view === 'gallery'}
-                                onClick={this.handleChangeView('gallery')}
-                            />
-                            <Table
-                                active={view === 'table'}
-                                onClick={this.handleChangeView('table')}
-                            />
-                        </View>
-                    </Navigation>
+                    <Navigation />
                     <Characters view={view}>
                         {isCharactersLoading && 'Characters is Loading'}
                         {!!characters.length &&
@@ -73,6 +33,7 @@ class CharacterList extends Component {
 
 export default connect(
     store => ({
+        view: store.navigation.view,
         characters: store.team.characters,
         teamName: store.team.teamName,
         isCharactersLoading: store.team.isCharactersLoading,
