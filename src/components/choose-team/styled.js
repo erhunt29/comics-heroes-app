@@ -25,7 +25,7 @@ export const Heading = styled.h1`
     font-size: 40px;
     text-align: center;
     text-transform: uppercase;
-    color: #000;
+    color: #eee;
     margin: 0;
     text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9);
 `;
