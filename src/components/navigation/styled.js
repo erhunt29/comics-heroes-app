@@ -44,7 +44,10 @@ const Button = styled.button`
         outline: none;
     }
 `;
-export const Filters = styled.div``;
+export const Filters = styled.div`
+    display: flex;
+    align-items: center;
+`;
 
 export const SortByName = styled(Button)`
     background-image: url(${sort});

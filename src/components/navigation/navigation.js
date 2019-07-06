@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeView, search, sort } from '../../action-creators';
+import { changeView, search, sort, chooseTeam } from '../../action-creators';
+import ComboBox from '../combo-box';
 import {
     NavigationWrapper,
     SeachForm,
@@ -48,6 +49,8 @@ class Navigation extends Component {
     render() {
         const {
             navigation: { view, sort },
+            teamName,
+            chooseTeam,
         } = this.props;
 
         const { value } = this.state;
@@ -66,6 +69,12 @@ class Navigation extends Component {
                         sort={sort}
                         active={sort}
                         onClick={this.handleSort}
+                    />
+                    <ComboBox
+                        data={['Marvel', 'DC', 'All']}
+                        defaultValue={teamName}
+                        width={100}
+                        select={chooseTeam}
                     />
                 </Filters>
                 <View>
@@ -86,6 +95,7 @@ class Navigation extends Component {
 export default connect(
     store => ({
         navigation: store.navigation,
+        teamName: store.team.teamName,
     }),
-    { changeView, search, sort }
+    { changeView, search, sort, chooseTeam }
 )(Navigation);

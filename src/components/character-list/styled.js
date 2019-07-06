@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import dcBg from './images/dc-bg.jpg';
 import marvelBg from './images/marvel-bg.jpg';
+import allBg from '../choose-team/images/banner.jpg';
 
 export const Root = styled.div``;
 
 export const Container = styled.div`
     background-image: url(${props =>
-        props.teamName === 'Marvel' ? marvelBg : dcBg});
+        props.teamName === 'Marvel'
+            ? marvelBg
+            : props.teamName === 'DC'
+            ? dcBg
+            : allBg});
     background-repeat: no-repeat;
     background-position: center top;
     background-size: contain;

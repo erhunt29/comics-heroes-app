@@ -22,7 +22,10 @@ export default store => next => action => {
             next({
                 ...action,
                 type: type + SUCCESS,
-                payload: characters[payload],
+                payload:
+                    payload === 'All'
+                        ? characters['Marvel'].concat(characters['DC'])
+                        : characters[payload],
             }),
         0
     );

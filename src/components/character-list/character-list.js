@@ -6,9 +6,10 @@ import { Root, Container, Character, Characters } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
 
 class CharacterList extends Component {
-    componentDidUpdate() {
-        const { teamName, characters, loadCharacters } = this.props;
-        if (teamName && !characters.length) loadCharacters(teamName);
+    componentDidUpdate(prevProps) {
+        const { teamName, loadCharacters } = this.props;
+
+        if (teamName !== prevProps.teamName) loadCharacters(teamName);
     }
 
     get characters() {
