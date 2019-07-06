@@ -6,19 +6,21 @@ export const Wrapper = styled.div`
     background-color: #fff;
     border-radius: 5px;
     height: 30px;
+    text-align: left;
 `;
 
 export const Select = styled.button`
     width: ${props => props.width}px;
     height: 30px;
+    border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
     padding: 0 10px;
     cursor: pointer;
     background: transparent;
     position: absolute;
-    z-index: 5;
     text-align: left;
+    z-index: 5;
     :focus {
         outline: none;
     }
@@ -32,7 +34,7 @@ export const List = styled.ul`
     margin: 0;
     padding: 0;
     height: ${props =>
-        props.data.length > 2 ? '80px' : `${props.data.length * 30}px`};
+        props.data.length > 3 ? '100px' : `${props.data.length * 30}px`};
     width: ${props => props.width}px;
     overflow: auto;
     background: #fff;
@@ -46,6 +48,7 @@ export const ListItem = styled.li`
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
+    background-color: ${props => (props.active ? '#2ab0fd' : null)};
     font-size: 14px;
     cursor: pointer;
 `;

@@ -18,6 +18,7 @@ export const Container = styled.div`
     padding-top: 220px;
     padding-bottom: 30px;
     box-sizing: border-box;
+    text-align: center;
 `;
 
 export const Heading = styled.h1`
@@ -31,7 +32,7 @@ export const Heading = styled.h1`
 `;
 
 export const Wrapper = styled.div`
-    margin: 30px auto 0 auto;
+    margin: 30px auto 20px auto;
     width: 350px;
     display: flex;
     justify-content: space-between;
@@ -62,4 +63,10 @@ export const Button = styled.button`
     :hover {
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
     }
+`;
+
+export const Link = styled.a`
+    font-size: 18px;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
 `;

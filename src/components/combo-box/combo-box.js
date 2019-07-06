@@ -24,11 +24,6 @@ class ComboBox extends PureComponent {
     handleSelectRow = item => () => {
         const { select } = this.props;
         select(item);
-
-        // this.setState({
-        //     isListOpen : false,
-        //     selectRow: i
-        // })
     };
 
     render() {
@@ -48,6 +43,7 @@ class ComboBox extends PureComponent {
                     <List data={data} width={width}>
                         {data.map(item => (
                             <ListItem
+                                active={defaultValue === item}
                                 key={item}
                                 onClick={this.handleSelectRow(item)}
                             >

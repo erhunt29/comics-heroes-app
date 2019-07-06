@@ -4,6 +4,8 @@ import {
     CHANGE_VIEW,
     SEARCH,
     SORT,
+    CHANGE_LANGUAGE,
+    GET_GEOLOCATION,
 } from './types';
 
 export const chooseTeam = teamName => ({
@@ -28,4 +30,13 @@ export const search = string => ({
 
 export const sort = () => ({
     type: SORT,
+});
+
+export const changeLanguage = language => ({
+    type: CHANGE_LANGUAGE,
+    payload: language,
+});
+
+export const getGeolocation = () => ({
+    type: GET_GEOLOCATION,
 });
