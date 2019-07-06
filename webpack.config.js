@@ -13,8 +13,14 @@ module.exports = {
                 use: 'babel-loader',
             },
             {
-                test: /\.(jpg|png|gif|svg)$/,
-                use: 'file-loader',
+                test: /\.(jpe?g|png|gif|svg)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name][hash].[ext]',
+                        publicPath: 'static',
+                    },
+                },
             },
         ],
     },

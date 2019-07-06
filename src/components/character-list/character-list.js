@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadCharacters } from '../../action-creators';
+import {
+    Root,
+    Container,
+    Heading,
+    Wrapper,
+    Button,
+    Character,
+    Characters,
+} from './styled';
 
 class CharacterList extends Component {
     componentDidUpdate() {
@@ -9,15 +18,21 @@ class CharacterList extends Component {
     }
 
     render() {
-        const { characters, isCharactersLoading } = this.props;
+        const { teamName, characters, isCharactersLoading } = this.props;
         return (
-            <div>
-                {isCharactersLoading && 'Characters is Loading'}
-                {!!characters.length &&
-                    characters.map(character => (
-                        <li key={character.id}>{character.name}</li>
-                    ))}
-            </div>
+            <Root>
+                <Container teamName={teamName}>
+                    <Characters>
+                        {isCharactersLoading && 'Characters is Loading'}
+                        {!!characters.length &&
+                            characters.map(character => (
+                                <Character key={character.id}>
+                                    {character.name}
+                                </Character>
+                            ))}
+                    </Characters>
+                </Container>
+            </Root>
         );
     }
 }

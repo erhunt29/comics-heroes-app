@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { chooseTeam } from '../../action-creators';
 
+import { Root, Container, Heading, Wrapper, Button } from './styled';
+
 class ChooseTeam extends Component {
     handleClick = team => () => {
         const { chooseTeam } = this.props;
@@ -12,11 +14,21 @@ class ChooseTeam extends Component {
         const { teamName } = this.props;
         return (
             !teamName && (
-                <div>
-                    <h1>Choose your team </h1>
-                    <button onClick={this.handleClick('DC')}>DC</button>
-                    <button onClick={this.handleClick('Marvel')}>Marvel</button>
-                </div>
+                <Root>
+                    <Container>
+                        <Heading>Choose team </Heading>
+                        <Wrapper>
+                            <Button
+                                onClick={this.handleClick('DC')}
+                                team={'DC'}
+                            />
+                            <Button
+                                onClick={this.handleClick('Marvel')}
+                                team={'Marvel'}
+                            />
+                        </Wrapper>
+                    </Container>
+                </Root>
             )
         );
     }

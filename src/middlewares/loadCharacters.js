@@ -24,6 +24,6 @@ export default store => next => action => {
                 type: type + SUCCESS,
                 payload: characters[payload],
             }),
-        1000
+        0
     );
 };
