@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeView } from '../../action-creators';
+import { changeView, search } from '../../action-creators';
 import {
     NavigationWrapper,
     SeachForm,
@@ -12,6 +12,10 @@ import {
 } from './styled';
 
 class Navigation extends Component {
+    state = {
+        value: '',
+    };
+
     handleChangeView = nextView => () => {
         const {
             navigation: { view },
@@ -21,15 +25,35 @@ class Navigation extends Component {
         if (view !== nextView) changeView(nextView);
     };
 
+    handleChangeInput = ev => {
+        const value = ev.target.value;
+        this.setState({
+            value,
+        });
+    };
+
+    handleSubmit = ev => {
+        ev.preventDefault();
+        const { value } = this.state;
+        const { search } = this.props;
+        search(value);
+    };
+
     render() {
         const {
             navigation: { view },
         } = this.props;
 
+        const { value } = this.state;
+
         return (
             <NavigationWrapper>
-                <SeachForm>
-                    <SeachInput placeholder={'...search'} />
+                <SeachForm onSubmit={this.handleSubmit}>
+                    <SeachInput
+                        placeholder={'...search'}
+                        onChange={this.handleChangeInput}
+                        value={value}
+                    />
                 </SeachForm>
                 <Filters></Filters>
                 <View>
@@ -51,5 +75,5 @@ export default connect(
     store => ({
         navigation: store.navigation,
     }),
-    { changeView }
+    { changeView, search }
 )(Navigation);

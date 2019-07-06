@@ -11,7 +11,13 @@ class CharacterList extends Component {
     }
 
     render() {
-        const { teamName, characters, isCharactersLoading, view } = this.props;
+        const {
+            teamName,
+            characters,
+            isCharactersLoading,
+            view,
+            search,
+        } = this.props;
         return (
             <Root>
                 <Container teamName={teamName}>
@@ -19,11 +25,28 @@ class CharacterList extends Component {
                     <Characters view={view}>
                         {isCharactersLoading && 'Characters is Loading'}
                         {!!characters.length &&
-                            characters.map(character => (
-                                <Character view={view} key={character.id}>
-                                    {character.name}
-                                </Character>
-                            ))}
+                            characters
+                                .filter(character => {
+                                    if (search) {
+                                        for (const key in character) {
+                                            if (
+                                                (character[key] + '')
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        search.toLowerCase()
+                                                    )
+                                            )
+                                                return true;
+                                        }
+                                        return false;
+                                    }
+                                    return true;
+                                })
+                                .map(character => (
+                                    <Character view={view} key={character.id}>
+                                        {character.name}
+                                    </Character>
+                                ))}
                     </Characters>
                 </Container>
             </Root>
@@ -33,10 +56,11 @@ class CharacterList extends Component {
 
 export default connect(
     store => ({
-        view: store.navigation.view,
         characters: store.team.characters,
         teamName: store.team.teamName,
         isCharactersLoading: store.team.isCharactersLoading,
+        view: store.navigation.view,
+        search: store.navigation.search,
     }),
     { loadCharacters }
 )(CharacterList);

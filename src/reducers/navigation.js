@@ -1,9 +1,9 @@
-import { CHANGE_VIEW } from '../action-creators/types';
+import { CHANGE_VIEW, SEARCH } from '../action-creators/types';
 
 const initialState = {
     view: 'gallery',
     filter: [],
-    search: [],
+    search: null,
 };
 
 export default (defaultState = initialState, action) => {
@@ -14,6 +14,11 @@ export default (defaultState = initialState, action) => {
             return {
                 ...defaultState,
                 view: payload,
+            };
+        case SEARCH:
+            return {
+                ...defaultState,
+                search: payload,
             };
         default:
             return defaultState;
