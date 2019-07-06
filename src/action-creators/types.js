@@ -11,3 +11,5 @@ export const LOAD_CHARACTERS = 'LOAD_CHARACTERS';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 
 export const SEARCH = 'SEARCH';
+
+export const SORT = 'SORT';

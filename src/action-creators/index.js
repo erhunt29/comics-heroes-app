@@ -1,4 +1,10 @@
-import { CHOOSE_TEAM, LOAD_CHARACTERS, CHANGE_VIEW, SEARCH } from './types';
+import {
+    CHOOSE_TEAM,
+    LOAD_CHARACTERS,
+    CHANGE_VIEW,
+    SEARCH,
+    SORT,
+} from './types';
 
 export const chooseTeam = teamName => ({
     type: CHOOSE_TEAM,
@@ -18,4 +24,8 @@ export const changeView = view => ({
 export const search = string => ({
     type: SEARCH,
     payload: string,
+});
+
+export const sort = () => ({
+    type: SORT,
 });

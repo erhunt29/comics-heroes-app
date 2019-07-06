@@ -1,9 +1,10 @@
-import { CHANGE_VIEW, SEARCH } from '../action-creators/types';
+import { CHANGE_VIEW, SEARCH, SORT } from '../action-creators/types';
 
 const initialState = {
     view: 'gallery',
     filter: [],
     search: null,
+    sort: null,
 };
 
 export default (defaultState = initialState, action) => {
@@ -19,6 +20,15 @@ export default (defaultState = initialState, action) => {
             return {
                 ...defaultState,
                 search: payload,
+            };
+
+        case SORT:
+            const { sort } = defaultState;
+            const nextSort =
+                sort === null ? 'up' : sort === 'up' ? 'down' : null;
+            return {
+                ...defaultState,
+                sort: nextSort,
             };
         default:
             return defaultState;

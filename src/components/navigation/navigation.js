@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeView, search } from '../../action-creators';
+import { changeView, search, sort } from '../../action-creators';
 import {
     NavigationWrapper,
     SeachForm,
     SeachInput,
     Filters,
+    SortByName,
     View,
     Gallery,
     Table,
@@ -39,9 +40,14 @@ class Navigation extends Component {
         search(value);
     };
 
+    handleSort = () => {
+        const { sort } = this.props;
+        sort();
+    };
+
     render() {
         const {
-            navigation: { view },
+            navigation: { view, sort },
         } = this.props;
 
         const { value } = this.state;
@@ -55,7 +61,13 @@ class Navigation extends Component {
                         value={value}
                     />
                 </SeachForm>
-                <Filters></Filters>
+                <Filters>
+                    <SortByName
+                        sort={sort}
+                        active={sort}
+                        onClick={this.handleSort}
+                    />
+                </Filters>
                 <View>
                     <Gallery
                         active={view === 'gallery'}
@@ -75,5 +87,5 @@ export default connect(
     store => ({
         navigation: store.navigation,
     }),
-    { changeView, search }
+    { changeView, search, sort }
 )(Navigation);

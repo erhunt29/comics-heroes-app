@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import sort from './images/sort-button.png';
 import gallery from './images/gallery-button.png';
 import table from './images/table-button.png';
 
@@ -29,15 +30,8 @@ export const SeachInput = styled.input`
     }
 `;
 
-export const Filters = styled.div``;
-
-export const View = styled.div`
-    margin-left: 30px;
-`;
-
-export const Gallery = styled.button`
+const Button = styled.button`
     cursor: pointer;
-    background-image: url(${gallery});
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 20px 20px;
@@ -45,12 +39,28 @@ export const Gallery = styled.button`
     height: 30px;
     border-radius: 5px;
     background-color: ${props => (props.active ? '#2ab0fd' : null)};
+    transition: background-color 100ms ease-out;
     :focus {
         outline: none;
     }
 `;
+export const Filters = styled.div``;
 
-export const Table = styled(Gallery)`
+export const SortByName = styled(Button)`
+    background-image: url(${sort});
+    transform: ${props =>
+        props.sort === 'down' ? 'rotate3d(1,0,0, 180deg)' : null};
+`;
+
+export const View = styled.div`
+    margin-left: 30px;
+`;
+
+export const Gallery = styled(Button)`
+    background-image: url(${gallery});
+`;
+
+export const Table = styled(Button)`
     background-image: url(${table});
     margin-left: 5px;
 `;

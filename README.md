@@ -4,7 +4,7 @@ Using React.js and Redux create the page with the list (i.e. DC and Marvel Comic
 
 -   items list
 -   filters
--   search
+-   searchInArray
 -   API interaction
 -   (optional) detail page
 -   (optional) mobile version
