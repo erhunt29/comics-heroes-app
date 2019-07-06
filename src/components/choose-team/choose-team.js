@@ -9,17 +9,22 @@ class ChooseTeam extends Component {
     };
 
     render() {
+        const { teamName } = this.props;
         return (
-            <div>
-                <h1>Choose your team </h1>
-                <button onClick={this.handleClick('DC')}>DC</button>
-                <button onClick={this.handleClick('Marvel')}>Marvel</button>
-            </div>
+            !teamName && (
+                <div>
+                    <h1>Choose your team </h1>
+                    <button onClick={this.handleClick('DC')}>DC</button>
+                    <button onClick={this.handleClick('Marvel')}>Marvel</button>
+                </div>
+            )
         );
     }
 }
 
 export default connect(
-    store => ({}),
+    store => ({
+        teamName: store.team.teamName,
+    }),
     { chooseTeam }
 )(ChooseTeam);

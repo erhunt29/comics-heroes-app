@@ -1,6 +1,16 @@
-import { CHOOSE_TEAM } from '../action-creators/types';
+import {
+    CHOOSE_TEAM,
+    LOAD_CHARACTERS,
+    START,
+    SUCCESS,
+    ERROR,
+} from '../action-creators/types';
 
-const initialState = {};
+const initialState = {
+    teamName: null,
+    characters: [],
+    isCharactersLoading: false,
+};
 
 export default (defaultState = initialState, action) => {
     const { type, payload } = action;
@@ -9,7 +19,20 @@ export default (defaultState = initialState, action) => {
         case CHOOSE_TEAM:
             return {
                 ...defaultState,
-                team: payload,
+                teamName: payload,
+            };
+
+        case LOAD_CHARACTERS + START:
+            return {
+                ...defaultState,
+                isCharactersLoading: true,
+            };
+
+        case LOAD_CHARACTERS + SUCCESS:
+            return {
+                ...defaultState,
+                isCharactersLoading: false,
+                characters: payload,
             };
 
         default:
