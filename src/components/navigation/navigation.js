@@ -49,6 +49,7 @@ class Navigation extends Component {
     render() {
         const {
             navigation: { view, sort },
+            lang,
             team,
         } = this.props;
 
@@ -59,7 +60,7 @@ class Navigation extends Component {
             <NavigationWrapper>
                 <SeachForm onSubmit={this.handleSubmit}>
                     <SeachInput
-                        placeholder={'...search'}
+                        placeholder={lang !== 'RU' ? 'search' : 'поиск'}
                         onChange={this.handleChangeInput}
                         value={value}
                     />
@@ -96,6 +97,10 @@ export default connect(
     store => ({
         navigation: store.navigation,
         team: store.router.location.pathname.slice(1),
+        lang:
+            store.lang.selectLang ||
+            store.lang.geolocationLang ||
+            store.lang.defaultLang,
     }),
     { changeView, search, sort }
 )(Navigation);

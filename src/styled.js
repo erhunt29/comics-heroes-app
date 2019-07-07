@@ -1,12 +1,17 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import React from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import marvelBg from './images/marvel-banner.jpg';
 import dcBg from './images/dc-banner.jpg';
 import allBg from './images/all-banner.jpg';
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
+
+  @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=cyrillic');
+  
   body {
     margin: 0;
     background-color: rgba(0, 0, 0, 0.9);
+    font-family: Roboto, Arial, sans-serif;
   }
   
   a {
@@ -14,6 +19,10 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 `;
+
+const theme = {
+    buttonActive: '#2ab0fd',
+};
 
 export const Container = styled.div`
     width: 1100px;
@@ -41,3 +50,14 @@ export const Lang = styled.div`
     right: 40px;
     top: 192px;
 `;
+
+export default ({ children }) => {
+    return (
+        <ThemeProvider theme={theme}>
+            <React.Fragment>
+                <GlobalStyle />
+                {children}
+            </React.Fragment>
+        </ThemeProvider>
+    );
+};

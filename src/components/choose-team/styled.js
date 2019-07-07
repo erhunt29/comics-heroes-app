@@ -7,7 +7,6 @@ export const Root = styled.div`
 `;
 
 export const Heading = styled.h1`
-    font-family: Roboto, Arial, sans-serif;
     font-size: 40px;
     text-align: center;
     text-transform: uppercase;

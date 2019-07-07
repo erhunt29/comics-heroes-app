@@ -12,13 +12,14 @@ export const NavigationWrapper = styled.nav`
     padding-right: 40px;
 `;
 
-export const SeachForm = styled.form``;
+export const SeachForm = styled.form`
+    margin-right: 30px;
+`;
 
 export const SeachInput = styled.input`
     width: 250px;
     height: 40px;
     border-radius: 20px;
-    font-family: Roboto, Arial, sans-serif;
     font-size: 18px;
     padding-left: 15px;
     padding-right: 15px;
@@ -37,7 +38,8 @@ const Button = styled.button`
     width: 30px;
     height: 30px;
     border-radius: 5px;
-    background-color: ${props => (props.active ? '#2ab0fd' : null)};
+    background-color: ${props =>
+        props.active ? props.theme.buttonActive : null};
     transition: background-color 100ms ease-out;
     :focus {
         outline: none;
@@ -50,6 +52,7 @@ export const Filters = styled.div`
 
 export const SortByName = styled(Button)`
     background-image: url(${sort});
+    margin-right: 5px;
     transform: ${props =>
         props.sort === 'down' ? 'rotate3d(1,0,0, 180deg)' : null};
 `;

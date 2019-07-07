@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Wrapper, Select, List, ListItem, ToggleList } from './styled';
 import arrow from './images/arrow.png';
 
-class ComboBox extends PureComponent {
+class ComboBox extends Component {
     state = {
         isListOpen: false,
     };

@@ -26,7 +26,6 @@ export const Characters = styled.ul`
 
 export const Character = styled.li`
     list-style: none;
-    font-family: Roboto, Arial, sans-serif;
     margin-bottom: ${props => (props.view === 'table' ? '30px' : '60px')};
     margin-right: 15px;
     margin-left: 15px;

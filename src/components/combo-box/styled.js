@@ -48,7 +48,8 @@ export const ListItem = styled.li`
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    background-color: ${props => (props.active ? '#2ab0fd' : null)};
+    background-color: ${props =>
+        props.active ? props.theme.buttonActive : null};
     font-size: 14px;
     cursor: pointer;
 `;

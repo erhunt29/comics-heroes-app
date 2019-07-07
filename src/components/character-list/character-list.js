@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { loadCharacters } from '../../action-creators';
 import Navigation from '../navigation';
-import { Root, Preloader, Character, Characters, Image } from './styled';
+import { Root, Preloader, Character, Characters } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
 import preloader from './images/preloader.svg';
 
@@ -20,8 +20,9 @@ class CharacterList extends Component {
         const {
             loadCharacters,
             location: { pathname },
+            lang,
         } = this.props;
-        if (prevProps.location.pathname !== pathname)
+        if (prevProps.location.pathname !== pathname || prevProps.lang !== lang)
             loadCharacters(pathname.slice(1));
     }
 
@@ -77,6 +78,10 @@ export default connect(
         view: store.navigation.view,
         search: store.navigation.search,
         sort: store.navigation.sort,
+        lang:
+            store.lang.selectLang ||
+            store.lang.geolocationLang ||
+            store.lang.defaultLang,
     }),
     { loadCharacters }
 )(CharacterList);
