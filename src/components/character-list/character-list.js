@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { loadCharacters } from '../../action-creators';
 import Navigation from '../navigation';
-import { Root, Preloader, Character, Characters } from './styled';
+import { Root, Preloader, Character, Characters, Image } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
 import preloader from './images/preloader.svg';
 
@@ -54,8 +54,12 @@ class CharacterList extends Component {
                             transitionLeave={false}
                         >
                             {this.characters.map(character => (
-                                <Character view={view} key={character.id}>
-                                    {character.name}
+                                <Character
+                                    view={view}
+                                    key={character.id}
+                                    src={character.img}
+                                >
+                                    <span>{character.name}</span>
                                 </Character>
                             ))}
                         </ReactCSSTransitionGroup>

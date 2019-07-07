@@ -16,17 +16,23 @@ export default store => next => action => {
         type: type + START,
     });
 
-    //imitation fetch data
-    setTimeout(
-        () =>
+    const { defaultLang, geolocationLang, selectLang } = store.getState().lang;
+
+    const lang = selectLang || geolocationLang || defaultLang;
+
+    fetch(`http://localhost:8080/${lang.toLowerCase()}/${payload}`)
+        .then(res => res.json())
+        .then(res =>
             next({
                 ...action,
                 type: type + SUCCESS,
-                payload:
-                    payload === 'all'
-                        ? characters['marvel'].concat(characters['dc'])
-                        : characters[payload],
-            }),
-        1000
-    );
+                payload: res,
+            })
+        )
+        .catch(error =>
+            next({
+                type: type + ERROR,
+                payload: error,
+            })
+        );
 };

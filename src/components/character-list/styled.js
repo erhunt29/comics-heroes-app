@@ -16,22 +16,42 @@ export const Characters = styled.ul`
     padding-top: 30px;
     padding-left: 40px;
     padding-right: 40px;
-    margin: 0;
+    margin: 0 -15px;
+
     span {
         display: ${props => (props.view === 'table' ? 'block' : 'flex')};
         flex-wrap: wrap;
-        justify-content: space-between;
     }
 `;
 
 export const Character = styled.li`
     list-style: none;
-    cursor: pointer;
     font-family: Roboto, Arial, sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: ${props => (props.view === 'table' ? '30px' : '60px')};
+    margin-right: 15px;
+    margin-left: 15px;
     width: 230px;
-    height: ${props => (props.view === 'table' ? 'auto' : '300px')};
+    background-image: url(${props =>
+        props.view === 'gallery' ? props.src : null});
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: ${props => (props.view === 'table' ? 'auto' : '320px')};
     background-color: #eee;
+    position: relative;
+    border: 1px solid #eee;
+
+    span {
+        position: absolute;
+        bottom: ${props => (props.view === 'table' ? '0' : '-30px')};
+        left: -1px;
+        display: block;
+        width: 232px;
+        height: 30px;
+        text-align: center;
+        border: ${props => (props.view === 'table' ? null : '1px solid #eee')};
+        box-sizing: border-box;
+        padding-top: 6px;
+    }
 
     &.character-appear {
         opacity: 0.01;
@@ -42,3 +62,5 @@ export const Character = styled.li`
         transition: opacity 0.5s linear;
     }
 `;
+
+export const Image = styled.img``;
