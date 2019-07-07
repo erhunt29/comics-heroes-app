@@ -27,6 +27,6 @@ export default store => next => action => {
                         ? characters['marvel'].concat(characters['dc'])
                         : characters[payload],
             }),
-        0
+        1000
     );
 };

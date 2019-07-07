@@ -5,8 +5,7 @@ import table from './images/table-button.png';
 
 export const NavigationWrapper = styled.nav`
     height: 65px;
-    background-color: rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    background-color: #eee;
     display: flex;
     align-items: center;
     padding-left: 40px;

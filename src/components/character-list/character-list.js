@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { loadCharacters } from '../../action-creators';
 import Navigation from '../navigation';
-import { Root, Character, Characters } from './styled';
+import { Root, Preloader, Character, Characters } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
+import preloader from './images/preloader.svg';
 
 class CharacterList extends Component {
     componentDidMount() {
@@ -39,16 +41,26 @@ class CharacterList extends Component {
         const { isCharactersLoading, view } = this.props;
 
         return (
-            <Root>
+            <Root isCharactersLoading={isCharactersLoading}>
                 <Navigation />
-                <Characters view={view}>
-                    {isCharactersLoading && 'Characters is Loading'}
-                    {this.characters.map(character => (
-                        <Character view={view} key={character.id}>
-                            {character.name}
-                        </Character>
-                    ))}
-                </Characters>
+                {isCharactersLoading && <Preloader src={preloader} />}
+                {!isCharactersLoading && (
+                    <Characters view={view}>
+                        <ReactCSSTransitionGroup
+                            transitionName="character"
+                            transitionAppear={true}
+                            transitionAppearTimeout={500}
+                            transitionEnter={false}
+                            transitionLeave={false}
+                        >
+                            {this.characters.map(character => (
+                                <Character view={view} key={character.id}>
+                                    {character.name}
+                                </Character>
+                            ))}
+                        </ReactCSSTransitionGroup>
+                    </Characters>
+                )}
             </Root>
         );
     }
