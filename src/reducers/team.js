@@ -8,6 +8,7 @@ import {
 const initialState = {
     characters: [],
     isCharactersLoading: false,
+    hasError: false,
 };
 
 export default (defaultState = initialState, action) => {
@@ -24,7 +25,15 @@ export default (defaultState = initialState, action) => {
             return {
                 ...defaultState,
                 isCharactersLoading: false,
+                hasError: false,
                 characters: payload,
+            };
+
+        case LOAD_CHARACTERS + ERROR:
+            return {
+                ...defaultState,
+                isCharactersLoading: false,
+                hasError: true,
             };
 
         default:

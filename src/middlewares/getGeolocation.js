@@ -1,4 +1,4 @@
-import { GET_GEOLOCATION, START, SUCCESS } from '../action-creators/types';
+import { GET_GEOLOCATION } from '../action-creators/types';
 
 export default store => next => action => {
     const { type } = action;

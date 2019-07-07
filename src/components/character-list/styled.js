@@ -12,6 +12,11 @@ export const Preloader = styled.img`
     top: 280px;
 `;
 
+export const Error = styled.div`
+    margin-top: 30px;
+    font-size: 30px;
+`;
+
 export const Characters = styled.ul`
     padding-top: 30px;
     padding-left: 40px;

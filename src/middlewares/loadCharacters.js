@@ -21,6 +21,15 @@ export default store => next => action => {
     const lang = selectLang || geolocationLang || defaultLang;
 
     fetch(`http://localhost:8080/${lang.toLowerCase()}/${payload}`)
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                return res;
+            } else {
+                const error = new Error(res.statusText);
+                error.response = res;
+                throw error;
+            }
+        })
         .then(res => res.json())
         .then(res =>
             next({

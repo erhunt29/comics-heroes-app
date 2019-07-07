@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { loadCharacters } from '../../action-creators';
 import Navigation from '../navigation';
-import { Root, Preloader, Character, Characters } from './styled';
+import { Root, Preloader, Error, Character, Characters } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
 import preloader from './images/preloader.svg';
 
@@ -39,12 +39,19 @@ class CharacterList extends Component {
     }
 
     render() {
-        const { isCharactersLoading, view } = this.props;
+        const { isCharactersLoading, view, hasError, lang } = this.props;
 
         return (
             <Root isCharactersLoading={isCharactersLoading}>
                 <Navigation />
                 {isCharactersLoading && <Preloader src={preloader} />}
+                {hasError && (
+                    <Error>
+                        {lang !== 'RU'
+                            ? 'Error: please check your connection'
+                            : 'Ошибка загрузки данных : проверьте соединение'}
+                    </Error>
+                )}
                 {!isCharactersLoading && (
                     <Characters view={view}>
                         <ReactCSSTransitionGroup
@@ -75,6 +82,7 @@ export default connect(
     store => ({
         characters: store.team.characters,
         isCharactersLoading: store.team.isCharactersLoading,
+        hasError: store.team.hasError,
         view: store.navigation.view,
         search: store.navigation.search,
         sort: store.navigation.sort,
