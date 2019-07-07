@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -10,6 +11,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
+                exclude: /node_modules/,
                 use: 'babel-loader',
             },
             {
@@ -24,6 +26,7 @@ module.exports = {
             },
         ],
     },
+    plugins: [new CopyPlugin([{ from: 'public', to: '../' }])],
     devServer: {
         publicPath: '/static/',
         contentBase: path.join(__dirname, 'public'),

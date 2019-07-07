@@ -20,7 +20,9 @@ export default store => next => action => {
 
     const lang = selectLang || geolocationLang || defaultLang;
 
-    fetch(`http://localhost:8080/${lang.toLowerCase()}/${payload}`)
+    fetch(
+        `https://comics-heroes-api.herokuapp.com/${lang.toLowerCase()}/${payload}`
+    )
         .then(res => {
             if (res.status >= 200 && res.status < 300) {
                 return res;
