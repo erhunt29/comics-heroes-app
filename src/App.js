@@ -5,6 +5,7 @@ import { Container, Banner, Lang } from './styled';
 import ChooseTeam from './components/choose-team';
 import CharacterList from './components/character-list';
 import ComboBox from './components/combo-box';
+import NoMatch from './components/no-match';
 import { changeLanguage, getGeolocation } from './action-creators';
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
                     <Route exact path="/all" component={CharacterList} />
                     <Route exact path="/marvel" component={CharacterList} />
                     <Route exact path="/dc" component={CharacterList} />
+                    <Route path="*" component={NoMatch} />
                 </Switch>
             </Container>
         );
