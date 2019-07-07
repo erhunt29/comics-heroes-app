@@ -1,24 +1,9 @@
 import styled from 'styled-components';
 import marvelLogo from './images/marvel.jpeg';
 import dcLogo from './images/dc.png';
-import banner from './images/banner.jpg';
 
 export const Root = styled.div`
     height: 900px;
-`;
-
-export const Container = styled.div`
-    background-image: url(${banner});
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-color: #fff;
-    height: 100%;
-    width: 1100px;
-    margin: 0 auto;
-    padding-top: 220px;
-    padding-bottom: 30px;
-    box-sizing: border-box;
-    text-align: center;
 `;
 
 export const Heading = styled.h1`
@@ -27,7 +12,7 @@ export const Heading = styled.h1`
     text-align: center;
     text-transform: uppercase;
     color: #eee;
-    margin: 0;
+    margin: 30px 0;
     text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9);
 `;
 
@@ -65,7 +50,7 @@ export const Button = styled.button`
     }
 `;
 
-export const Link = styled.a`
+export const SeeAll = styled.span`
     font-size: 18px;
     border-bottom: 1px solid #000;
     cursor: pointer;

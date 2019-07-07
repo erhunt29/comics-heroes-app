@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { Wrapper, Select, List, ListItem, ToggleList } from './styled';
 import arrow from './images/arrow.png';
 
 class ComboBox extends PureComponent {
     state = {
         isListOpen: false,
-        selectRow: 0,
     };
 
     handleCloseList = () => {
@@ -23,11 +23,11 @@ class ComboBox extends PureComponent {
 
     handleSelectRow = item => () => {
         const { select } = this.props;
-        select(item);
+        select && select(item);
     };
 
     render() {
-        const { data, width, defaultValue } = this.props;
+        const { data, width, defaultValue, link } = this.props;
         const { isListOpen } = this.state;
         return (
             <Wrapper width={width}>
@@ -42,13 +42,20 @@ class ComboBox extends PureComponent {
                 {isListOpen && (
                     <List data={data} width={width}>
                         {data.map(item => (
-                            <ListItem
-                                active={defaultValue === item}
+                            <Link
+                                to={link ? `/${item.toLowerCase()}` : '#'}
                                 key={item}
-                                onClick={this.handleSelectRow(item)}
                             >
-                                {item}
-                            </ListItem>
+                                <ListItem
+                                    active={
+                                        defaultValue.toLowerCase() ===
+                                        item.toLowerCase()
+                                    }
+                                    onClick={this.handleSelectRow(item)}
+                                >
+                                    {item}
+                                </ListItem>
+                            </Link>
                         ))}
                     </List>
                 )}

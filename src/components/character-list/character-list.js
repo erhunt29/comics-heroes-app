@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadCharacters } from '../../action-creators';
 import Navigation from '../navigation';
-import { Root, Container, Character, Characters } from './styled';
+import { Root, Character, Characters } from './styled';
 import { searchInArray, sortArrayByField } from '../../helpers';
 
 class CharacterList extends Component {
-    componentDidUpdate(prevProps) {
-        const { teamName, loadCharacters } = this.props;
+    componentDidMount() {
+        const {
+            loadCharacters,
+            location: { pathname },
+        } = this.props;
+        loadCharacters(pathname.slice(1));
+    }
 
-        if (teamName !== prevProps.teamName) loadCharacters(teamName);
+    componentDidUpdate(prevProps) {
+        const {
+            loadCharacters,
+            location: { pathname },
+        } = this.props;
+        if (prevProps.location.pathname !== pathname)
+            loadCharacters(pathname.slice(1));
     }
 
     get characters() {
@@ -25,21 +36,19 @@ class CharacterList extends Component {
     }
 
     render() {
-        const { teamName, isCharactersLoading, view } = this.props;
+        const { isCharactersLoading, view } = this.props;
 
         return (
             <Root>
-                <Container teamName={teamName}>
-                    <Navigation />
-                    <Characters view={view}>
-                        {isCharactersLoading && 'Characters is Loading'}
-                        {this.characters.map(character => (
-                            <Character view={view} key={character.id}>
-                                {character.name}
-                            </Character>
-                        ))}
-                    </Characters>
-                </Container>
+                <Navigation />
+                <Characters view={view}>
+                    {isCharactersLoading && 'Characters is Loading'}
+                    {this.characters.map(character => (
+                        <Character view={view} key={character.id}>
+                            {character.name}
+                        </Character>
+                    ))}
+                </Characters>
             </Root>
         );
     }
@@ -48,7 +57,6 @@ class CharacterList extends Component {
 export default connect(
     store => ({
         characters: store.team.characters,
-        teamName: store.team.teamName,
         isCharactersLoading: store.team.isCharactersLoading,
         view: store.navigation.view,
         search: store.navigation.search,

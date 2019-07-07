@@ -1,5 +1,4 @@
 import {
-    CHOOSE_TEAM,
     LOAD_CHARACTERS,
     START,
     SUCCESS,
@@ -7,7 +6,6 @@ import {
 } from '../action-creators/types';
 
 const initialState = {
-    teamName: null,
     characters: [],
     isCharactersLoading: false,
 };
@@ -16,12 +14,6 @@ export default (defaultState = initialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case CHOOSE_TEAM:
-            return {
-                ...defaultState,
-                teamName: payload,
-            };
-
         case LOAD_CHARACTERS + START:
             return {
                 ...defaultState,

@@ -1,4 +1,4 @@
-const Marvel = [
+const marvel = [
     {
         name: 'Thor',
         id: 'mar100001',
@@ -54,7 +54,7 @@ const Marvel = [
     },
 ];
 
-const DC = [
+const dc = [
     {
         name: 'Superman',
         id: 'dc100001',
@@ -114,4 +114,4 @@ const DC = [
     },
 ];
 
-export default { Marvel, DC };
+export default { marvel, dc };

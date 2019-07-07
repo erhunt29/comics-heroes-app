@@ -1,17 +1,52 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
-
-import { GlobalStyle } from './styled';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
+import { Container, Banner, Lang } from './styled';
 import ChooseTeam from './components/choose-team';
 import CharacterList from './components/character-list';
+import ComboBox from './components/combo-box';
+import { changeLanguage, getGeolocation } from './action-creators';
 
-const App = () => (
-    <Provider store={store}>
-        <GlobalStyle />
-        <ChooseTeam />
-        <CharacterList />
-    </Provider>
-);
+class App extends Component {
+    componentDidMount() {
+        const { getGeolocation } = this.props;
+        getGeolocation();
+    }
 
-export default App;
+    render() {
+        const {
+            lang: { selectLang, defaultLang, geolocationLang },
+            changeLanguage,
+            team,
+        } = this.props;
+        return (
+            <Container>
+                <Banner team={team} />
+                <Lang>
+                    <ComboBox
+                        data={['RU', 'EN']}
+                        defaultValue={
+                            selectLang || geolocationLang || defaultLang
+                        }
+                        width={70}
+                        select={changeLanguage}
+                    />
+                </Lang>
+                <Switch>
+                    <Route exact path="/" component={ChooseTeam} />
+                    <Route exact path="/all" component={CharacterList} />
+                    <Route exact path="/marvel" component={CharacterList} />
+                    <Route exact path="/dc" component={CharacterList} />
+                </Switch>
+            </Container>
+        );
+    }
+}
+
+export default connect(
+    store => ({
+        lang: store.lang,
+        team: store.router.location.pathname.slice(1),
+    }),
+    { getGeolocation, changeLanguage }
+)(App);

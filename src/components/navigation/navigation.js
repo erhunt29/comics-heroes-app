@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeView, search, sort, chooseTeam } from '../../action-creators';
+import { changeView, search, sort } from '../../action-creators';
 import ComboBox from '../combo-box';
 import {
     NavigationWrapper,
@@ -49,12 +49,12 @@ class Navigation extends Component {
     render() {
         const {
             navigation: { view, sort },
-            teamName,
-            chooseTeam,
+            team,
         } = this.props;
 
         const { value } = this.state;
-
+        const data = ['Marvel', 'DC', 'All'];
+        const defaultValue = data.find(item => item.toLowerCase() === team);
         return (
             <NavigationWrapper>
                 <SeachForm onSubmit={this.handleSubmit}>
@@ -71,10 +71,10 @@ class Navigation extends Component {
                         onClick={this.handleSort}
                     />
                     <ComboBox
-                        data={['Marvel', 'DC', 'All']}
-                        defaultValue={teamName}
+                        data={data}
+                        defaultValue={defaultValue}
                         width={100}
-                        select={chooseTeam}
+                        link
                     />
                 </Filters>
                 <View>
@@ -95,7 +95,7 @@ class Navigation extends Component {
 export default connect(
     store => ({
         navigation: store.navigation,
-        teamName: store.team.teamName,
+        team: store.router.location.pathname.slice(1),
     }),
-    { changeView, search, sort, chooseTeam }
+    { changeView, search, sort }
 )(Navigation);
