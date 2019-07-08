@@ -30,6 +30,7 @@ export const List = styled.ul`
     position: absolute;
     z-index: 5;
     top: 30px;
+    left: 0;
     list-style: none;
     margin: 0;
     padding: 0;

@@ -33,7 +33,7 @@ class ComboBox extends Component {
             <Wrapper width={width}>
                 <Select
                     onClick={this.handleToggleList}
-                    onBlur={() => setTimeout(this.handleCloseList, 30)}
+                    onBlur={() => setTimeout(this.handleCloseList, 150)}
                     width={width}
                 >
                     {defaultValue}
